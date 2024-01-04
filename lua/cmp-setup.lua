@@ -42,6 +42,11 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
+
+    --[[ Custom mapping ]]
+    --Return j and k for scrolling the items.
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
   },
   sources = {
     { name = 'nvim_lsp' },
