@@ -26,8 +26,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
-
-
--- [[ Custom Keymaps ]]
---
-vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
