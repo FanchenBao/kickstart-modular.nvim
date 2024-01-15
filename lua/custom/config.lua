@@ -1,5 +1,6 @@
 -- [[ Custom Keymaps ]]
 vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
+vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { silent = true, noremap = true})
 
 
 --[[ Custom LSP is configured in lsp-setup.lua ]]
