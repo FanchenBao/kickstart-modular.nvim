@@ -1,6 +1,9 @@
 -- [[ Custom Keymaps ]]
 vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
 vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { silent = true, noremap = true})
+-- indent by pressing > or < multiple times
+vim.keymap.set('v', '>', '>gv', { noremap = true})
+vim.keymap.set('v', '<', '<gv', { noremap = true})
 
 
 --[[ Custom LSP is configured in lsp-setup.lua ]]
