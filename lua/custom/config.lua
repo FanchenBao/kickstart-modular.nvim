@@ -1,9 +1,14 @@
 -- [[ Custom Keymaps ]]
-vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
-vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { silent = true, noremap = true})
+local opts = { noremap = true, silent = true }
+vim.keymap.set("i", "jj", "<Esc>", opts)
+vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", opts)
 -- indent by pressing > or < multiple times
-vim.keymap.set('v', '>', '>gv', { noremap = true})
-vim.keymap.set('v', '<', '<gv', { noremap = true})
+vim.keymap.set('v', '>', '>gv', opts)
+vim.keymap.set('v', '<', '<gv', opts)
+-- Neogen annotation generation
+vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>", opts)
+vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>", opts)
 
 
 --[[ Custom LSP is configured in lsp-setup.lua ]]
