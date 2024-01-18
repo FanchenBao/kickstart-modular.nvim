@@ -9,7 +9,8 @@ vim.keymap.set('v', '<', '<gv', opts)
 vim.api.nvim_set_keymap("n", "<Leader>nf", ":lua require('neogen').generate({ type = 'func' })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>nc", ":lua require('neogen').generate({ type = 'class' })<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ type = 'type' })<CR>", opts)
-
+-- Map ctrl-w v to open a new buffer
+vim.keymap.set('n', '<C-w>v', '<esc>:vnew<cr>', opts)
 
 --[[ Custom LSP is configured in lsp-setup.lua ]]
 
@@ -37,6 +38,7 @@ cmp.setup{
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.colorcolumn = '79,120'
+vim.opt.splitright = true  --when a panel is vertically split, it appears on the right side
 
 --[[ Python set up ]]
 -- refer to https://neovim.io/doc/user/provider.html#provider-python
