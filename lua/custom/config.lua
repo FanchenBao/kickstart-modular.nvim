@@ -22,7 +22,14 @@ cmp.setup{
     --Return j and k for scrolling the items.
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-k>'] = cmp.mapping.select_prev_item(),
-  }
+  },
+  enabled = function()
+    if require"cmp.config.context".in_treesitter_capture("comment") == true or require"cmp.config.context".in_syntax_group("Comment") then
+      return false
+    else
+      return true
+    end
+  end
 }
 
 
