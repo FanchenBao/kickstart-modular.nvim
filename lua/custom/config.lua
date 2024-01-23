@@ -25,12 +25,22 @@ cmp.setup{
     ['<C-k>'] = cmp.mapping.select_prev_item(),
   },
   enabled = function()
-    if require"cmp.config.context".in_treesitter_capture("comment") == true or require"cmp.config.context".in_syntax_group("Comment") then
-      return false
-    else
-      return true
-    end
-  end
+    -- Disable autocomplete inside comments
+    local context = require("cmp.config.context")
+    return not context.in_treesitter_capture("comment") or not context.in_syntax_group("Comment") or not context.in_treesitter_capture("string") or not context.in_syntax_group("String")
+  end,
+  sources = {
+    { name = 'nvim_lsp' },
+    {
+      name = 'luasnip',
+      entry_filter = function()
+        -- Disable snippet inside string
+        local context = require("cmp.config.context")
+        return not context.in_treesitter_capture("string") and not context.in_syntax_group("String") and not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+      end,
+    },
+    { name = 'path' },
+  },
 }
 
 
