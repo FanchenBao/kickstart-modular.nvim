@@ -5,11 +5,6 @@ return {
         filter = "classic"
     })
     vim.cmd.colorscheme 'monokai-pro'
-    require('lualine').setup {
-          options = {
-            theme = 'monokai-pro'
-          }
-        }
   end
 }
 

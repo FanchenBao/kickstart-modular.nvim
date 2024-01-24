@@ -74,3 +74,17 @@ vim.api.nvim_create_autocmd('FileType', {
 --[[ Transparent NeoVim ]]
 vim.api.nvim_set_hl(0, "Normal", { guibg=NONE, ctermbg=NONE })
 
+--[[ Configure lualine ]]
+require('lualine').setup {
+  options = { theme = 'monokai-pro' },
+  sections = {
+    lualine_c = {
+      {
+        'filename',
+        file_status = true, -- displays file status (readonly status, modified status)
+        path = 2 -- 0 = just filename, 1 = relative path, 2 = absolute path
+      }
+    }
+  }
+}
+
