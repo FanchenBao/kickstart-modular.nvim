@@ -57,12 +57,13 @@ vim.g.python3_host_prog = '~/.pyenv/versions/pynvim/bin/python'
 --[[ Automatic tab width based on file type ]]
 vim.opt.expandtab = true;
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'js', 'py'},
+  pattern = { 'javascript', 'python' },
   callback = function()
     vim.opt_local.tabstop = 4
     vim.opt_local.shiftwidth = 4
   end
 })
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'sh', 'json'},
   callback = function()
