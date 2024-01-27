@@ -16,7 +16,7 @@ vim.keymap.set('n', '<C-w>v', '<esc>:vnew<cr>', opts)
 
 
 -- Autocomplete matching braces, brackets, parentheses, and quotations
-local matching_symbols = { '()', '{}', '[]', '<>', '""', "''" }
+local matching_symbols = { '()', '{}', '[]', '<>' }
 
 ---@param rel number relative position to the current cursor. Can be negative 
 ---@return string # the character at rel position to cursor
