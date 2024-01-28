@@ -14,9 +14,18 @@ vim.api.nvim_set_keymap("n", "<Leader>nt", ":lua require('neogen').generate({ ty
 -- Map ctrl-w v to open a new buffer
 vim.keymap.set('n', '<C-w>v', '<esc>:vnew<cr>', opts)
 
+--- Auxiliary function to build as set
+--- Taken from https://www.lua.org/pil/11.5.html
+---@param list Array a list of values to turn into a set
+---@return table # table pretending as set
+function Set (list)
+  local set = {}
+  for _, l in ipairs(list) do set[l] = true end
+  return set
+end
 
 -- Autocomplete matching braces, brackets, parentheses, and quotations
-local matching_symbols = { '()', '{}', '[]', '<>' }
+local matching_symbols = Set{ '()', '{}', '[]', '<>', }
 
 ---@param rel number relative position to the current cursor. Can be negative 
 ---@return string # the character at rel position to cursor
@@ -29,37 +38,37 @@ end
 --- Determine whether the cursor is in between matching symbols
 ---@return boolean # true => cursor is between matching symbols, otherwise false
 function config.is_cursor_between_matching_symbols()
-  local char = config.get_char_relative_to_cursor(1)
-  local char_before = config.get_char_relative_to_cursor(0)
-  for _, symbols in ipairs(matching_symbols) do
-    if symbols == char_before .. char then
-      return true
-    end
+  local chars = config.get_char_relative_to_cursor(0) .. config.get_char_relative_to_cursor(1)
+  if matching_symbols[chars] then
+    return true
   end
   return false
 end
 
-for _, symbols in ipairs(matching_symbols) do
+for symbols, _ in pairs(matching_symbols) do
   -- type double matching symbols, keep the cursor in between
-  vim.keymap.set('i', symbols, symbols .. '<Esc>ha', opts)
+  vim.keymap.set('i', symbols, symbols .. '<Esc>', opts)
   -- -- type a left matching symbol, if nothing is on the right, auto fill the
   -- -- right symbol and move the cursor in between. If there is something on
   -- -- the right, only input the left matching symbol
-  -- vim.keymap.set('i', symbols:sub(1, 1), function()
-  --   local char = config.get_char_relative_to_cursor(1)
-  --   return char ~= '' and symbols:sub(1, 1) or symbols .. '<Esc>ha'
-  -- end, opts_expr)
-  -- when cursor is in between matching symbols and we press CR, automatically
-  -- create extra line with indent
-  vim.keymap.set('i', '<CR>', function()
-     return config.is_cursor_between_matching_symbols() and '<CR><Esc>ko' or '<CR>'
-  end, opts_expr)
-  -- when cursor is in between matching symbols and we press BS, automatically
-  -- delete both matching symbols
-  vim.keymap.set('i', '<BS>', function ()
-    return config.is_cursor_between_matching_symbols() and '<Esc>la<BS><BS>' or '<BS>'
+  vim.keymap.set('i', symbols:sub(1, 1), function()
+    local char = config.get_char_relative_to_cursor(1)
+    return char ~= '' and symbols:sub(1, 1) or symbols .. '<Esc>'
   end, opts_expr)
 end
+
+-- when cursor is in between matching symbols and we press Enter, automatically
+-- add a line in between and format its indent according to the indent
+-- convention set for the key press of 'o'
+vim.keymap.set('i', '<CR>', function()
+   return config.is_cursor_between_matching_symbols() and '<CR><Esc>ko' or '<CR>'
+end, opts_expr)
+-- when cursor is in between matching symbols and we press BS, automatically
+-- delete both matching symbols
+vim.keymap.set('i', '<BS>', function ()
+  return config.is_cursor_between_matching_symbols() and '<Esc>la<BS><BS>' or '<BS>'
+end, opts_expr)
+
 
 
 --[[ Custom LSP is configured in lsp-setup.lua ]]
@@ -99,6 +108,7 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.colorcolumn = '79,120'
 vim.opt.splitright = true  --when a panel is vertically split, it appears on the right side
+vim.wo.wrap = false -- do not wrap lines
 
 --[[ Python set up ]]
 -- refer to https://neovim.io/doc/user/provider.html#provider-python
