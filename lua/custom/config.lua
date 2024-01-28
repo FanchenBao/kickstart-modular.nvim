@@ -47,13 +47,13 @@ end
 
 for symbols, _ in pairs(matching_symbols) do
   -- type double matching symbols, keep the cursor in between
-  vim.keymap.set('i', symbols, symbols .. '<Esc>', opts)
+  vim.keymap.set('i', symbols, symbols .. '<Esc>ha', opts)
   -- -- type a left matching symbol, if nothing is on the right, auto fill the
   -- -- right symbol and move the cursor in between. If there is something on
   -- -- the right, only input the left matching symbol
   vim.keymap.set('i', symbols:sub(1, 1), function()
     local char = config.get_char_relative_to_cursor(1)
-    return char ~= '' and symbols:sub(1, 1) or symbols .. '<Esc>'
+    return char ~= '' and symbols:sub(1, 1) or symbols .. '<Esc>ha'
   end, opts_expr)
 end
 
