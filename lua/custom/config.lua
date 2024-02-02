@@ -46,12 +46,15 @@ function config.is_cursor_between_matching_symbols()
 end
 
 for symbols, _ in pairs(matching_symbols) do
-  -- if type the symbols in full, do not move the cursor
-  vim.keymap.set('i', symbols, symbols)
+  local left = symbols:sub(1, 1)
+  local right = symbols:sub(2, 2)
   -- type a left matching symbol, if nothing is on the right, auto fill the
   --  right symbol and move the cursor in between. If there is something on
   --  the right, only input the left matching symbol
-  vim.keymap.set('i', symbols:sub(1, 1), symbols .. '<Esc>ha', opts)
+  vim.keymap.set('i', left, symbols .. '<Esc>ha', opts)
+  vim.keymap.set('i', right, function ()
+    return config.get_char_relative_to_cursor(1) == right and '<Esc>la' or right
+  end, opts_expr)
 end
 
 -- when cursor is in between matching symbols and we press Enter, automatically
