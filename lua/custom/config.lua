@@ -108,7 +108,7 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.colorcolumn = '79,120'
 vim.opt.splitright = true  --when a panel is vertically split, it appears on the right side
-vim.wo.wrap = true
+vim.wo.linebreak = true
 
 --[[ Python set up ]]
 -- refer to https://neovim.io/doc/user/provider.html#provider-python
