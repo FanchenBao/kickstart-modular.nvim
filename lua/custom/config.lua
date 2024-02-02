@@ -25,7 +25,7 @@ function Set (list)
 end
 
 -- Autocomplete matching braces, brackets, parentheses, and quotations
-local matching_symbols = Set{ '()', '{}', '[]', '<>', }
+local matching_symbols = Set{ '()', '{}', '[]', }
 
 ---@param rel number relative position to the current cursor. Can be negative 
 ---@return string # the character at rel position to cursor
@@ -46,15 +46,12 @@ function config.is_cursor_between_matching_symbols()
 end
 
 for symbols, _ in pairs(matching_symbols) do
-  -- type double matching symbols, keep the cursor in between
-  vim.keymap.set('i', symbols, symbols .. '<Esc>ha', opts)
-  -- -- type a left matching symbol, if nothing is on the right, auto fill the
-  -- -- right symbol and move the cursor in between. If there is something on
-  -- -- the right, only input the left matching symbol
-  vim.keymap.set('i', symbols:sub(1, 1), function()
-    local char = config.get_char_relative_to_cursor(1)
-    return char ~= '' and symbols:sub(1, 1) or symbols .. '<Esc>ha'
-  end, opts_expr)
+  -- if type the symbols in full, do not move the cursor
+  vim.keymap.set('i', symbols, symbols)
+  -- type a left matching symbol, if nothing is on the right, auto fill the
+  --  right symbol and move the cursor in between. If there is something on
+  --  the right, only input the left matching symbol
+  vim.keymap.set('i', symbols:sub(1, 1), symbols .. '<Esc>ha', opts)
 end
 
 -- when cursor is in between matching symbols and we press Enter, automatically
