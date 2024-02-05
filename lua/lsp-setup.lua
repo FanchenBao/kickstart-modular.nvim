@@ -74,6 +74,10 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+
+-- Follow the instructions here for Java:
+-- https://github.com/nvim-java/nvim-java?tab=readme-ov-file#hammer-how-to-install
+require('java').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -81,6 +85,7 @@ local servers = {
   -- rust_analyzer = {},
   tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  jdtls = {},
 
   lua_ls = {
     Lua = {
