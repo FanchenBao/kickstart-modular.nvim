@@ -77,4 +77,4 @@ require 'cmp-setup'
 
 
 --[[ Custom configuration ]]
-require 'custom.config'
+require 'custom.init'
