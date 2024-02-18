@@ -10,8 +10,13 @@ return {
     require("mason-null-ls").setup({
       ensure_installed =
       {
+        -- javascript
         "prettier",
         "eslint-lsp",
+        -- python
+        "ruff",
+        "mypy",
+        "black",
       },
       automatic_installation = true,
     })
@@ -21,8 +26,11 @@ return {
 
     null_ls.setup({
       sources = {
-        -- null_ls.builtins.diagnostics.eslint,  --eslint seems to have been already set up
+        -- null_ls.builtins.diagnostics.eslint,  -- seems to have been already set up by eslint-lsp
         null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.mypy,
+        null_ls.builtins.diagnostics.ruff,
+        null_ls.builtins.formatting.black,
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
@@ -40,6 +48,6 @@ return {
         end
       end,
     })
-
   end,
 }
+
