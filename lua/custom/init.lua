@@ -10,3 +10,4 @@ require('custom.languages.python').setup()
 
 require('custom.languages.tabsize').setup()
 
+require('custom.telescope').setup()
