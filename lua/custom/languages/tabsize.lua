@@ -12,7 +12,7 @@ function tabsize.setup()
   })
 
   vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'sh', 'json'},
+    pattern = {'sh', 'json', 'make'},
     callback = function()
       vim.opt_local.tabstop = 2
       vim.opt_local.shiftwidth = 2
