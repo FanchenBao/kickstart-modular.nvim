@@ -34,6 +34,10 @@ function telescope.setup()
     }
   }
 
+  local builtin = require('telescope.builtin')
+  vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = "Find Buffers"})
+  vim.keymap.set('n', '<leader>gs', '<cmd>AdvancedGitSearch<CR>', { desc = 'AdvancedGitSearch' })
+
 end
 
 return telescope
