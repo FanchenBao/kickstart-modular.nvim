@@ -28,9 +28,13 @@ return {
       sources = {
         -- null_ls.builtins.diagnostics.eslint,  -- seems to have been already set up by eslint-lsp
         null_ls.builtins.formatting.prettier.with {
-          condition = function (utils)
-            return utils.root_has_file {'.prettierrc.js'}
-          end,
+          -- NOTE: I eventually choose not to set the following condition
+          -- because it is too limiting. While my project can always have
+          -- .prettierrc.js set up, other people's repo might not.
+          --
+          -- condition = function (utils)
+          --   return utils.root_has_file {'.prettierrc.js'}
+          -- end,
           prefer_local = 'node_modules/.bin',
         },
         null_ls.builtins.diagnostics.mypy,
