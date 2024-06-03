@@ -83,6 +83,7 @@ local servers = {
   tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   jdtls = {},
+  ruff = {},
 
   lua_ls = {
     Lua = {

@@ -1,4 +1,5 @@
 local telescope = {}
+local actions = require('telescope.actions')
 
 function telescope.setup()
   -- Allow live grep to include hidden files
@@ -21,6 +22,17 @@ function telescope.setup()
   --   }
   -- end, { desc = '[S]earch [F]iles' })
   require('telescope').setup{
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-j>"] = actions.cycle_history_next,
+          ["<C-k>"] = actions.cycle_history_prev,
+        }
+      },
+      history = {
+        cycle_wrap = true,
+      },
+    },
     pickers = {
       find_files = {
         find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },

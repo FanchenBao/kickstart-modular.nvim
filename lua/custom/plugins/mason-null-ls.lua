@@ -14,7 +14,6 @@ return {
         "prettier",
         "eslint-lsp",
         -- python
-        "ruff",
         "mypy",
         "black",
       },
@@ -38,7 +37,6 @@ return {
           prefer_local = 'node_modules/.bin',
         },
         null_ls.builtins.diagnostics.mypy,
-        null_ls.builtins.diagnostics.ruff,
         null_ls.builtins.formatting.black,
       },
       on_attach = function(client, bufnr)
