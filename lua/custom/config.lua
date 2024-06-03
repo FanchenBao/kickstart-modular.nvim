@@ -8,8 +8,11 @@ function config.setup()
   vim.opt.splitright = true  --when a panel is vertically split, it appears on the right side
   vim.wo.linebreak = true
 
-  --[[ Transparent NeoVim ]]
-  vim.api.nvim_set_hl(0, "Normal", { guibg=NONE, ctermbg=NONE })
+  -- [[ Nvim Explorer ]]
+  vim.g.netrw_banner = 0 -- hide netrw banner
+  vim.g.netrw_liststyle = 3 -- Tree style view
+
+  vim.api.nvim_set_hl(0, "Normal", { guibg=nil, ctermbg=nil })
 
   --[[ Configure lualine ]]
   require('lualine').setup {
