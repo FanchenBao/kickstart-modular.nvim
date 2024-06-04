@@ -18,7 +18,7 @@
   "monokai-pro.nvim": { "branch": "master", "commit": "2bad2a92fe0ff6c8581d33a853a1b17592b83239" },
   "neodev.nvim": { "branch": "main", "commit": "1f4ebcc10852518166ce165e57d425a4265a10d4" },
   "neogen": { "branch": "main", "commit": "6de0add4805165317ab7d3d36b5cef48b1b865f3" },
-  "none-ls.nvim": { "branch": "main", "commit": "c2dd47284f5f800fe86a6f848de4114bc83408cf" },
+  "none-ls.nvim": { "branch": "main", "commit": "d997b77b9390589d0a25d19985494b82cfc3d777" },
   "nvim-cmp": { "branch": "main", "commit": "5260e5e8ecadaf13e6b82cf867a909f54e15fd07" },
   "nvim-dap": { "branch": "master", "commit": "6f79b822997f2e8a789c6034e147d42bc6706770" },
   "nvim-dap-python": { "branch": "master", "commit": "ae0225d0d4a46e18e6057ab3701ef87bbbd6aaad" },
