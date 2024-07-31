@@ -16,6 +16,10 @@ return {
         -- python
         "mypy",
         "black",
+        -- go
+        "gofumpt",
+        "goimports-reviser",
+        "golines",
       },
       automatic_installation = true,
     })
@@ -36,8 +40,16 @@ return {
           -- end,
           prefer_local = 'node_modules/.bin',
         },
+
+        -- python
         null_ls.builtins.diagnostics.mypy,
         null_ls.builtins.formatting.black,
+
+        -- go
+        null_ls.builtins.formatting.goimports_reviser,
+        null_ls.builtins.formatting.golines.with {
+          extra_args = {"-m", "79"},
+        },
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then

@@ -77,7 +77,17 @@ require('mason-lspconfig').setup()
 
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    gopls = {
+      gofumpt = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+        unusedvariable= true,
+      }
+    }
+  },
   pyright = {},
   -- rust_analyzer = {},
   tsserver = {},
