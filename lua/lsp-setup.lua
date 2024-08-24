@@ -26,8 +26,11 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- That said, it is more intuitive, at least for now, to use `H` for hover
+  -- and `K` for signature
+  -- Also cannot use C-k because is reserved for tmux pane switching
+  nmap('H', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
