@@ -50,6 +50,7 @@ return {
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+    vim.keymap.set('n', '<F4>', dap.terminate, { desc = 'Debug: Terminate' })
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
@@ -88,5 +89,19 @@ return {
     -- Install golang specific config
     require('dap-go').setup()
     require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+
+    -- This is a work-around to get debugger to work for C++. For whatever
+    -- reason, without explicitly setting the host and port, I cannot initiate
+    -- the debugging session, always getting EACCES permission denied error.
+    -- This work-around explicitly point the debugging session to a server,
+    -- which MUST be spun up ahead of time in a separate tmux window.
+    -- You can run the command $codelldb directly, as it has been created as
+    -- an alias in .zshrc.
+    -- See also https://www.reddit.com/r/neovim/comments/txfy9z/codelldb_configuration_for_nvimdap/
+    dap.adapters.codelldb = {
+      type = 'server',
+      host = '127.0.0.1',
+      port = 13000,
+    }
   end,
 }
