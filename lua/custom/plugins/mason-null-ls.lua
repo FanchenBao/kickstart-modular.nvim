@@ -20,6 +20,8 @@ return {
         "gofumpt",
         "goimports-reviser",
         "golines",
+        -- cpp
+        "clang-format",
       },
       automatic_installation = true,
     })
@@ -50,6 +52,9 @@ return {
         null_ls.builtins.formatting.golines.with {
           extra_args = {"-m", "79"},
         },
+
+        -- cpp
+        null_ls.builtins.formatting.clang_format,
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
